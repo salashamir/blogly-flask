@@ -15,5 +15,21 @@
   <button formaction="/users/{{user.id}}/delete" formmethod="POST">Delete</button>
 </form>
 
+<h2>User posts:</h2>
+<ul>
+  {% for post in user.posts %}
+  <li>
+    <a href="/posts/{{post.id}}">{{post.title}}</a>
+    <small>{{ post.formatted_date }}</small>
+  </li>
+  {% endfor %}
+</ul>
+
+<p>
+  <a href="/users/{{user.id}}/posts/new">Add a post</a>
+</p>
+
+<p><a href="/users">Back to users</a></p>
+<p><a href="/">Back to recent posts</a></p>
 
 {% endblock %}
