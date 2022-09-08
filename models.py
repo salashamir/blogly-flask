@@ -41,3 +41,21 @@ class Post(db.Model):
     def formatted_date(self):
         """Return a formatted date representation useful for displaying"""
         return self.created_at.strftime("%c")
+
+class PostTag(db.Model):
+    """Model for join table b/w posts and tags"""
+
+    __tablename__ = "post_tags"
+
+    post_id = db.Column(db.Integer, db.ForeignKey('posts.id'), primary_key=True)
+    tag_id = db.Column(db.Integer, db.ForeignKey('tags.id'), primary_key=True)
+
+class Tag(db.Model):
+    """Model for tags"""
+
+    __tablename__ = "tags"
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.Text, nullable=False, unique=True)
+
+    posts = db.relationship('Post', secondary="post_tags", backref="tags")

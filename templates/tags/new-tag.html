@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Create New Tag{% endblock %}
+
+{% block content %}
+
+<h1>Create a new tag:</h1>
+
+<form action="/tags/new" method="POST">
+  <div>
+    <label for="name">Tag name:</label>
+    <input type="text" id="name" name="name" placeholder="Enter tag name here...">
+  </div>
+  <div>
+    {% for post in posts %}
+    <div>
+      <input type="checkbox" value="{{post.id}}" id="post_{{post.id}}" name="posts">
+      <label for="post_{{post.id}}">{{post.title}}</label>
+    </div>
+    {% endfor %}
+  </div>
+  <div>
+    <div>
+    <a href="/tags">Cancel</a>
+  </div>
+    <button type="submit">Add Tag</button>
+  </div>
+</form>
+
+{% endblock %}
